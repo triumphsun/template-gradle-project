@@ -1,0 +1,5 @@
+rootProject.name = 'template-gradle-mutli-subprojects'
+
+include('prj-lib-core')
+include('prj-app-cli')
+include('prj-app-web')

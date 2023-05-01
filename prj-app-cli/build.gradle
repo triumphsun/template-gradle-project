@@ -1,0 +1,9 @@
+plugins {
+    id 'java'
+}
+
+java {
+    dependencies {
+        implementation project(':prj-lib-core')
+    }
+}
