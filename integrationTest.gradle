@@ -41,3 +41,10 @@ tasks.register('integrationTest', Test) {
 tasks.named('check') {
     it.dependsOn integrationTest
 }
+
+idea {
+    it.module {
+        testSourceDirs += sourceSets.integrationTest.allJava.srcDirs
+        testResourceDirs += sourceSets.integrationTest.resources.srcDirs
+    }
+}

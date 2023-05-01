@@ -2,6 +2,7 @@ subprojects {
 
     it.apply {
         it.plugin 'java'
+        it.plugin 'idea'
     }
 
     it.java {
