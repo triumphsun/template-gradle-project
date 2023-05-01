@@ -1,11 +1,16 @@
-plugins {
-    id 'java'
-}
-
 subprojects {
-    java {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+
+    it.apply {
+        it.plugin 'java'
+    }
+
+    it.java {
+        it.sourceCompatibility JavaVersion.VERSION_17
+        it.targetCompatibility JavaVersion.VERSION_17
+
+        apply {
+            it.from "${rootDir}/integrationTest.gradle"
+        }
 
         repositories {
             mavenCentral()
@@ -13,6 +18,10 @@ subprojects {
 
         dependencies {
 
+        }
+
+        tasks.withType(Test) {
+            it.useJUnitPlatform()
         }
     }
 }

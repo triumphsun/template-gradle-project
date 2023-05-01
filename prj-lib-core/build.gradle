@@ -3,5 +3,11 @@ plugins {
 }
 
 java {
+    dependencies {
+        testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 
+        integrationTestImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+        integrationTestRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    }
 }

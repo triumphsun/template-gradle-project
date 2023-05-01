@@ -1,0 +1,43 @@
+configurations {
+    integrationTestImplementation.extendsFrom implementation
+    integrationTestRuntimeOnly.extendsFrom runtimeOnly
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += sourceSets.main.output
+            runtimeClasspath += sourceSets.main.output
+        }
+    }
+}
+
+tasks.named('compileJava') { Task task ->
+    {
+        task.getProject().getConfigurations().forEach({ Configuration configuration ->
+            {
+                if (configuration.getName().endsWith('mplementation')) {
+                    configuration.getDependencies().forEach({ Dependency dependency ->
+                        {
+                            if (dependency instanceof ProjectDependency) {
+                                task.dependsOn dependency.dependencyProject.tasks.named('check')
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+}
+
+tasks.register('integrationTest', Test) {
+    description = 'Runs integration tests.'
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    it.shouldRunAfter test
+}
+
+tasks.named('check') {
+    it.dependsOn integrationTest
+}
