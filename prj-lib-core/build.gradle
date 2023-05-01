@@ -3,6 +3,15 @@ plugins {
 }
 
 java {
+
+    sourceSets {
+        main {
+            java {
+                srcDirs += "src/impl/java"
+            }
+        }
+    }
+
     dependencies {
         testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
         testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
